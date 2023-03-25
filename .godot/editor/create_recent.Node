@@ -1,9 +1,11 @@
+Label
+Panel
+ItemList
 Timer
 MeshInstance3D
 CollisionShape3D
 Area3D
 ProgressBar
-Label
 Control
 CharacterBody3D
 VisibleOnScreenNotifier3D

@@ -2,12 +2,22 @@ extends CharacterBody3D
 
 signal damaged(damage)
 signal healed(healing)
+signal changeWeapon()
+signal changeAmmo()
 
 # Stores bullets
 @export var bullet_scene: PackedScene
 
-# Track Healtha
+# Track Health
 @export var health = 10
+
+# Define weapons
+var weapons = ["pistol", "rifle", "shotgun"]
+var equiped_weapon = 0
+
+# Track ammo
+@export var shotgun_ammo = 10
+@export var rifle_ammo = 20
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -26,11 +36,18 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 		
 	# Handle Shoot.
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") && weapons[equiped_weapon] == "pistol":
+		shoot("pistol")
+	if Input.is_action_just_pressed("shoot") && weapons[equiped_weapon] == "shotgun":
+		shoot("shotgun")
+	if Input.is_action_pressed("shoot") && weapons[equiped_weapon] == "rifle":
 		if $GunCooldown.is_stopped():
-			shoot()
-			$GunCooldown.start(0.25)
-		
+			$GunCooldown.start(0.20)
+			shoot("rifle")
+
+	# Handle Swap.
+	if Input.is_action_just_pressed("swap"):
+		swap_weapon()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -55,16 +72,42 @@ func _physics_process(delta):
 	var angle = screen_pos.angle_to_point(mouse_pos)
 	rotation.y = -angle + offset
 
-func shoot():
-	# Create a bullet instance and add it to the scene.
-	var bullet = bullet_scene.instantiate()
-	
+func shoot(gun):
 	# Get the location and angle of the bullet
 	var bullet_spawn_location = $GunModel/BulletSpawner.global_position
 	var angle = rotation
-	
-	get_node("/root/Main").add_child(bullet)
-	bullet.initialize("player", bullet_spawn_location, angle)
+
+	if gun == "pistol":
+		var bullet = bullet_scene.instantiate()
+		bullet.initialize("player", bullet_spawn_location, angle)
+		get_node("/root/Main").add_child(bullet)
+	elif gun == "rifle":
+		if rifle_ammo > 0:
+			var bullet = bullet_scene.instantiate()
+			bullet.initialize("player", bullet_spawn_location, angle)
+			get_node("/root/Main").add_child(bullet)
+			rifle_ammo -= 1
+	elif gun == "shotgun":
+		if shotgun_ammo > 0:
+			var bullet = bullet_scene.instantiate()
+			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y-0.25, angle.z))
+			get_node("/root/Main").add_child(bullet)
+			bullet = bullet_scene.instantiate()
+			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y-0.125, angle.z))
+			get_node("/root/Main").add_child(bullet)
+			bullet = bullet_scene.instantiate()
+			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y, angle.z))
+			get_node("/root/Main").add_child(bullet)
+			bullet = bullet_scene.instantiate()
+			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y+0.125, angle.z))
+			get_node("/root/Main").add_child(bullet)
+			bullet = bullet_scene.instantiate()
+			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y+0.25, angle.z))
+			get_node("/root/Main").add_child(bullet)
+			shotgun_ammo -= 1
+			
+	emit_signal("changeAmmo")
+
 	
 func hit(damage):
 	health -= damage
@@ -75,3 +118,17 @@ func hit(damage):
 func heal(healing):
 	health += healing
 	emit_signal("healed", healing)
+	
+func add_ammo(type, amount):
+	if type == "rifle":
+		rifle_ammo += amount
+	elif type == "shotgun":
+		shotgun_ammo += amount
+	emit_signal("changeAmmo")
+	
+	
+func swap_weapon():
+	equiped_weapon += 1
+	if equiped_weapon > 2:
+		equiped_weapon = 0
+	emit_signal("changeWeapon")

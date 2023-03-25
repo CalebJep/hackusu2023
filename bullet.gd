@@ -11,7 +11,7 @@ func _physics_process(delta):
 	if target:
 		if target.get_collider().has_method("hit"):
 			target.get_collider().hit(damage)
-			queue_free()
+		queue_free()
 
 func initialize(source, start_position, angle):
 	# Set as player or enemy bullet
