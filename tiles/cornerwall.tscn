@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgv6dpff6w01m"]
+
+[ext_resource type="PackedScene" uid="uid://bjtiyb40xmajt" path="res://Models/Cornerwallfinal.glb" id="1_fl24l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a7a45"]
+size = Vector3(1, 4, 4)
+
+[node name="cornerwall" type="StaticBody3D"]
+
+[node name="Cornerwallfinal" parent="." instance=ExtResource("1_fl24l")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
+shape = SubResource("BoxShape3D_a7a45")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.74228e-08, 2, -2)
+shape = SubResource("BoxShape3D_a7a45")

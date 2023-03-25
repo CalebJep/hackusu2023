@@ -1,6 +1,11 @@
 extends Node3D
 
-@export var tile : PackedScene
+@export var floor : PackedScene
+#simple, inner, and outer walls
+@export var s_wall : PackedScene
+@export var i_wall : PackedScene
+@export var o_wall : PackedScene
+
 @export var tileSize: int
 
 var rooms = []
@@ -20,32 +25,64 @@ var directions = [1, 0, 0, 1, -1, 0, 0, -1]
 func _ready():
 	generate(12, 6, 3)
 	generate_matrix()
-	print_matrix()
 	mark_available_doors()
 	print("\n")
 	print_matrix()
-	var yrot = 0
 	for i in range(rooms.size()):
 		
 		var room = rooms[i] as Room
 		for x in range(room.x, room.x + room.width):
 			for y in range(room.y, room.y + room.height):
-				var newTile = tile.instantiate() as Node3D
+				var newTile = floor.instantiate() as Node3D
 				newTile.position.x = x * tileSize
 				newTile.position.z = y * tileSize
-				newTile.rotate_y(yrot)
 				get_node("/root/Node3D").add_child(newTile)
-		yrot += 10
+				
 
 	doors = remove_duplicate_doors(doors)
+	print_matrix()
+	for i in range(rooms.size()):
+		var room = rooms[i] as Room
+		for x in range(room.x, room.x + room.width):
+			for y in range(room.y, room.y + room.height):
+				make_walls(x, y)
 
 	for door in doors:
 		door = door as Door
-		var doortile = tile.instantiate() as Node3D
+		var doortile = floor.instantiate() as Node3D
 		doortile.position.x = door.x * tileSize
 		doortile.position.z = door.y * tileSize
-		doortile.rotate_z(PI)
+		make_walls(door.x, door.y)
 		get_node("/root/Node3D").add_child(doortile)
+
+func make_walls(x, y):
+	var first_wall
+	var i = 0
+	while i < 4:
+		var x_offset = directions[i * 2]
+		var y_offset = directions[i * 2 + 1]
+		if matrix['values'][y + y_offset - matrix['starty']][x + x_offset - matrix['startx']] == 0:
+			x_offset = directions[((i + 1) % 4) * 2]
+			y_offset = directions[((i + 1) % 4) * 2 + 1]
+			if matrix['values'][y + y_offset - matrix['starty']][x + x_offset - matrix['startx']] == 0:
+				#instantiate a corner/inner wall and advance i
+				var i_wall_new = i_wall.instantiate() as Node3D
+				i_wall_new.position = Vector3(x * tileSize, 0, y * tileSize)
+				i_wall_new.rotate_y(PI * -i / 2 + PI)
+				get_node("/root/Node3D").add_child(i_wall_new)
+				i += 2
+				if i >= 4 and first_wall != null:
+					first_wall.queue_free()
+				continue
+			else:
+				#instantiate a wall
+				var walltile = s_wall.instantiate() as Node3D
+				walltile.position = Vector3(x * tileSize, 0, y * tileSize)
+				walltile.rotate_y(PI * -i / 2+ PI)
+				get_node("/root/Node3D").add_child(walltile)
+				if i == 0:
+					first_wall = walltile
+		i += 1
 
 #note: destructive function
 func remove_duplicate_doors(doors : Array):
@@ -60,6 +97,7 @@ func remove_duplicate_doors(doors : Array):
 				break
 		if keep:
 			kept_doors.append(door)
+			matrix['values'][door.y - matrix['starty']][door.x - matrix['startx']] = -1
 	return kept_doors
 
 func mark_available_doors():
@@ -85,7 +123,6 @@ func mark_available_doors():
 #							room.id = id_val
 #							room.populate_matrix(matrix, matrix['values'][i + 1][j])
 						doors.append(Door.new(j + matrix['startx'], i + matrix['starty'], [matrix['values'][i + 1][j], matrix['values'][i - 1][j]] ))
-						
 func get_rooms_by_id(id : int):
 	var ret = []
 	for room in rooms:
@@ -94,8 +131,8 @@ func get_rooms_by_id(id : int):
 	return ret
 	
 func generate_matrix():
-	var row = [0]
-	row.resize(matrix['endx'] - matrix['startx'])
+	var row = []
+	row.resize(matrix['endx'] - matrix['startx'] + 1)
 	row.fill(0)
 	for i in range(matrix['endy'] - matrix['starty'] + 1):
 		matrix['values'].append(row.duplicate())
@@ -172,13 +209,13 @@ class Room:
 		self.height = height
 		self.id = id
 		if self.x - 1 < matrix['startx']:
-			matrix['startx'] = self.x - 1
+			matrix['startx'] = self.x - 2
 		elif self.x + self.width + 1 > matrix['endx']:
-			matrix['endx'] = self.x + self.width + 1
+			matrix['endx'] = self.x + self.width + 2
 		if self.y + 1 < matrix['starty']:
-			matrix['starty'] = self.y + 1
+			matrix['starty'] = self.y - 2
 		elif self.y + self.height + 1 > matrix['endy']:
-			matrix['endy'] = self.y + self.height + 1
+			matrix['endy'] = self.y + self.height + 2
 	
 	func check_overlap(otherRoom):
 		otherRoom = otherRoom as Room
