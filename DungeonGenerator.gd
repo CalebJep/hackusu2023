@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var tile : PackedScene
+@export var tileSize: int
 
 var rooms = []
 var doors = []
@@ -30,8 +31,8 @@ func _ready():
 		for x in range(room.x, room.x + room.width):
 			for y in range(room.y, room.y + room.height):
 				var newTile = tile.instantiate() as Node3D
-				newTile.position.x = x
-				newTile.position.z = y
+				newTile.position.x = x * tileSize
+				newTile.position.z = y * tileSize
 				newTile.rotate_y(yrot)
 				get_node("/root/Node3D").add_child(newTile)
 		yrot += 10
@@ -41,8 +42,8 @@ func _ready():
 	for door in doors:
 		door = door as Door
 		var doortile = tile.instantiate() as Node3D
-		doortile.position.x = door.x
-		doortile.position.z = door.y
+		doortile.position.x = door.x * tileSize
+		doortile.position.z = door.y * tileSize
 		doortile.rotate_z(PI)
 		get_node("/root/Node3D").add_child(doortile)
 
