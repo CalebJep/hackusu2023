@@ -9,7 +9,7 @@
 [node name="EnemyMelee" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03362, 0)
 collision_layer = 2
-collision_mask = 15
+collision_mask = 13
 script = ExtResource("1_jkudl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -22,3 +22,11 @@ skeleton = NodePath("../CollisionShape3D")
 
 [node name="HitCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+collision_mask = 5
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

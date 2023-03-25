@@ -42,7 +42,7 @@ func _physics_process(delta):
 		shoot("shotgun")
 	if Input.is_action_pressed("shoot") && weapons[equiped_weapon] == "rifle":
 		if $GunCooldown.is_stopped():
-			$GunCooldown.start(0.20)
+			$GunCooldown.start()
 			shoot("rifle")
 
 	# Handle Swap.

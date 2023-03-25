@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://nvqlswmfqw1o" path="res://shotgun_ammo_pickup.tscn" id="10_vnc52"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkiib"]
+albedo_color = Color(1, 0.219608, 0.129412, 1)
 albedo_texture = ExtResource("1_v4bxo")
 
 [sub_resource type="BoxMesh" id="BoxMesh_xqenq"]
@@ -134,7 +135,7 @@ mesh = SubResource("BoxMesh_xqenq")
 shape = SubResource("BoxShape3D_wpool")
 
 [node name="Wall" type="StaticBody3D" parent="."]
-transform = Transform3D(-0.04, 0, 0, 0, 9.936, 0, 0, 0, -0.03, -3, 4.48708, -5)
+transform = Transform3D(-0.3168, 0, 0, 0, 9.936, 0, 0, 0, -0.03, -2, 4.48708, -8)
 collision_layer = 4
 collision_mask = 0
 
