@@ -6,14 +6,36 @@ extends Node3D
 @export var rifle_scene: PackedScene
 @export var shotgun_scene: PackedScene
 
-func _on_main_menu_start_game():	
-	var turret = turret_scene.instantiate()
-	turret.position = $Spawns/TurretSpawn.position
-	add_child(turret)
-	
-	var melee = melee_scene.instantiate()
-	melee.position = $Spawns/MeleeSpawn.position
-	add_child(melee)
+func _on_main_menu_start_game():
+	var turrets = get_tree().get_nodes_in_group("TurretSpawn")
+	for spawn in turrets:
+		var turret = turret_scene.instantiate()
+		turret.position = spawn.position
+		add_child(turret)
+		
+	var melees = get_tree().get_nodes_in_group("MeleeSpawn")
+	for spawn in melees:
+		var melee = melee_scene.instantiate()
+		melee.position = spawn.position
+		add_child(melee)
+		
+	var healths = get_tree().get_nodes_in_group("HealthSpawn")
+	for spawn in healths:
+		var health = health_scene.instantiate()
+		health.position = spawn.position
+		add_child(health)
+		
+	var rifles = get_tree().get_nodes_in_group("TurretSpawn")
+	for spawn in rifles:
+		var rifle = rifle_scene.instantiate()
+		rifle.position = spawn.position
+		add_child(rifle)
+		
+	var shotguns = get_tree().get_nodes_in_group("ShotgunSpawn")
+	for spawn in shotguns:
+		var shotgun = shotgun_scene.instantiate()
+		shotgun.position = spawn.position
+		add_child(shotgun)
 	
 	var health = health_scene.instantiate()
 	health.position = $Spawns/HealthSpawn.position
