@@ -25,7 +25,7 @@ func _on_main_menu_start_game():
 		health.position = spawn.position
 		add_child(health)
 		
-	var rifles = get_tree().get_nodes_in_group("TurretSpawn")
+	var rifles = get_tree().get_nodes_in_group("RifleSpawn")
 	for spawn in rifles:
 		var rifle = rifle_scene.instantiate()
 		rifle.position = spawn.position
