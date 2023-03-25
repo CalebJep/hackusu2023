@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cet7eo83x3uab"]
+[gd_scene load_steps=6 format=3 uid="uid://d337rcjme8qh3"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_sefpf"]
+[ext_resource type="Script" path="res://enemygun.gd" id="1_3rkku"]
 [ext_resource type="PackedScene" uid="uid://ylbdaayxsm7b" path="res://bullet.tscn" id="2_ixqcq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_owang"]
@@ -9,11 +9,11 @@
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_go50o"]
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="EnemyGun" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03362, 0)
 collision_layer = 2
 collision_mask = 15
-script = ExtResource("1_sefpf")
+script = ExtResource("1_3rkku")
 bullet_scene = ExtResource("2_ixqcq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

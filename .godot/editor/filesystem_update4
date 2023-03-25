@@ -1,11 +1,9 @@
-res://HealthBar.gd
 res://default_env.tres
+res://EnemyMelee.gd
 res://main.tscn
-res://character.gd
 res://character.tscn
 res://bullet.tscn
-res://enemy.tscn
-res://bullet.gd
-res://enemy.gd
-res://Area3D.gd
+res://enemygun.tscn
 res://health_pickup.tscn
+res://enemy_melee.tscn
+res://character.gd

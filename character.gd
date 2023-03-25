@@ -46,6 +46,9 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	# Rotate to face mouse
+	# TODO: Should probably rotate around gun instead of body for more accuracy
+	# TODO: May need to take height into account
+	# TODO: Finalize once player/gun model is finished
 	var offset = -PI * 0.5
 	var screen_pos = get_node("/root/Main/CameraPivot/Camera3D").unproject_position(global_transform.origin)
 	var mouse_pos = get_viewport().get_mouse_position()

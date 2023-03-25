@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://jy42jcydgc4a"]
+[gd_scene load_steps=11 format=3 uid="uid://bkjiok1m3cgjs"]
 
 [ext_resource type="PackedScene" uid="uid://damodg7vlykkg" path="res://character.tscn" id="1_4ifcc"]
 [ext_resource type="Script" path="res://HealthBar.gd" id="1_d7am8"]
 [ext_resource type="Texture2D" uid="uid://bawnnb1rhguwv" path="res://icon.png" id="1_v4bxo"]
 [ext_resource type="Script" path="res://MeshInstance3D.gd" id="2_ylno0"]
-[ext_resource type="PackedScene" uid="uid://cet7eo83x3uab" path="res://enemy.tscn" id="4_30cvs"]
+[ext_resource type="PackedScene" uid="uid://d337rcjme8qh3" path="res://enemygun.tscn" id="4_30cvs"]
 [ext_resource type="PackedScene" uid="uid://rbxbstf2x601" path="res://health_pickup.tscn" id="6_rvstv"]
+[ext_resource type="PackedScene" uid="uid://bjxxmlpi65jkc" path="res://enemy_melee.tscn" id="7_k4qu7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkiib"]
 albedo_texture = ExtResource("1_v4bxo")
@@ -75,6 +76,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.494, 1, -5.912)
 
 [node name="HealthPickup" parent="." instance=ExtResource("6_rvstv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -3)
+
+[node name="EnemyMelee" parent="." instance=ExtResource("7_k4qu7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 2)
 
 [connection signal="damaged" from="Character" to="UI/HealthBar" method="_on_character_damaged"]
 [connection signal="healed" from="Character" to="UI/HealthBar" method="_on_character_healed"]
