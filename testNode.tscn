@@ -18,7 +18,7 @@ o_wall = ExtResource("5_b4hxp")
 tileSize = 4
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.394471, 0.918908, 0, -0.918908, 0.394471, 0, 70.2106, 27.1542)
+transform = Transform3D(0.782423, 0.514113, -0.351428, -7.45058e-09, 0.564319, 0.825557, 0.622747, -0.645935, 0.441536, 0, 23.2082, 6.97689)
 environment = SubResource("Environment_bo8qg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]

@@ -62,9 +62,9 @@ func make_walls(x, y):
 		var x_offset = directions[i * 2]
 		var y_offset = directions[i * 2 + 1]
 		if matrix['values'][y + y_offset - matrix['starty']][x + x_offset - matrix['startx']] == 0:
-			x_offset = directions[((i + 1) % 4) * 2]
-			y_offset = directions[((i + 1) % 4) * 2 + 1]
-			if matrix['values'][y + y_offset - matrix['starty']][x + x_offset - matrix['startx']] == 0:
+			var new_x_offset = directions[((i + 1) % 4) * 2]
+			var new_y_offset = directions[((i + 1) % 4) * 2 + 1]
+			if matrix['values'][y + new_y_offset - matrix['starty']][x + new_x_offset - matrix['startx']] == 0:
 				#instantiate a corner/inner wall and advance i
 				var i_wall_new = i_wall.instantiate() as Node3D
 				i_wall_new.position = Vector3(x * tileSize, 0, y * tileSize)
@@ -75,6 +75,11 @@ func make_walls(x, y):
 					first_wall.queue_free()
 				continue
 			else:
+				if matrix['values'][y + y_offset + new_y_offset - matrix['starty']][x + x_offset + new_x_offset - matrix['startx']] != 0:
+					var wallpatch = o_wall.instantiate() as Node3D
+					wallpatch.position = Vector3((x + x_offset) * tileSize, 0, (y + y_offset) * tileSize)
+					wallpatch.rotate_y(PI * -i / 2 - PI / 2)
+					get_node("/root/Node3D").add_child(wallpatch)
 				#instantiate a wall
 				var walltile = s_wall.instantiate() as Node3D
 				walltile.position = Vector3(x * tileSize, 0, y * tileSize)
