@@ -9,7 +9,7 @@
 [sub_resource type="Environment" id="Environment_bo8qg"]
 ambient_light_color = Color(0, 0, 0.298039, 1)
 
-[node name="Node3D" type="Node3D"]
+[node name="Main" type="Node3D"]
 script = ExtResource("1_s6vnp")
 floor = ExtResource("2_qynvb")
 s_wall = ExtResource("3_dbeex")

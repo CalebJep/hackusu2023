@@ -1,102 +1,54 @@
+[gd_scene load_steps=24 format=3 uid="uid://quiuxyfxavw4"]
 
-[gd_scene load_steps=22 format=3 uid="uid://upf1o1mk1k47"]
+[ext_resource type="Script" path="res://main.gd" id="1_c5gjd"]
+[ext_resource type="Script" path="res://DungeonGenerator.gd" id="1_rx7gu"]
+[ext_resource type="PackedScene" uid="uid://dnpyym87t3qd1" path="res://tiles/floor.tscn" id="2_dx5tl"]
+[ext_resource type="PackedScene" uid="uid://d337rcjme8qh3" path="res://enemygun.tscn" id="2_l3o67"]
+[ext_resource type="PackedScene" uid="uid://c43m6g3mes7ud" path="res://tiles/simplewall.tscn" id="3_brobe"]
+[ext_resource type="PackedScene" uid="uid://bjxxmlpi65jkc" path="res://enemy_melee.tscn" id="3_pw0um"]
+[ext_resource type="PackedScene" uid="uid://cgv6dpff6w01m" path="res://tiles/cornerwall.tscn" id="4_7uvtb"]
+[ext_resource type="PackedScene" uid="uid://rbxbstf2x601" path="res://health_pickup.tscn" id="4_56s3n"]
+[ext_resource type="PackedScene" uid="uid://bn7d1tkiehxab" path="res://tiles/inversewall.tscn" id="5_16ml7"]
+[ext_resource type="PackedScene" uid="uid://ba5nyxhqkyhrg" path="res://rifle_ammo_pickup.tscn" id="5_rc3od"]
+[ext_resource type="PackedScene" uid="uid://nvqlswmfqw1o" path="res://shotgun_ammo_pickup.tscn" id="6_dplge"]
+[ext_resource type="PackedScene" uid="uid://d3qfhx3iw68qy" path="res://character.tscn" id="6_k11mq"]
+[ext_resource type="AudioStream" uid="uid://cfr174oaswen6" path="res://SoundAffects/green-sky-125179.mp3" id="7_5xnwn"]
+[ext_resource type="Script" path="res://HealthBar.gd" id="8_3idmw"]
+[ext_resource type="Script" path="res://GunPanel.gd" id="9_b8r48"]
+[ext_resource type="Script" path="res://Main Menu.gd" id="10_fm1qd"]
 
+[sub_resource type="Sky" id="Sky_7r5ns"]
 
-[ext_resource type="PackedScene" uid="uid://d3qfhx3iw68qy" path="res://character.tscn" id="1_4ifcc"]
-[ext_resource type="Script" path="res://HealthBar.gd" id="1_d7am8"]
-[ext_resource type="Script" path="res://Main Menu.gd" id="1_hj8el"]
-[ext_resource type="Script" path="res://main.gd" id="1_vyvbx"]
-[ext_resource type="Script" path="res://GunPanel.gd" id="2_ooi7e"]
-[ext_resource type="PackedScene" uid="uid://d337rcjme8qh3" path="res://enemygun.tscn" id="4_30cvs"]
-[ext_resource type="PackedScene" uid="uid://rbxbstf2x601" path="res://health_pickup.tscn" id="6_rvstv"]
-[ext_resource type="PackedScene" uid="uid://bjxxmlpi65jkc" path="res://enemy_melee.tscn" id="7_k4qu7"]
-[ext_resource type="PackedScene" uid="uid://cpitw0nvoq428" path="res://spawners/melee_spawn.tscn" id="7_ym552"]
-[ext_resource type="PackedScene" uid="uid://3klv4vsy1ers" path="res://spawners/turret_spawn.tscn" id="8_560xd"]
-[ext_resource type="PackedScene" uid="uid://ba5nyxhqkyhrg" path="res://rifle_ammo_pickup.tscn" id="9_hehu8"]
-[ext_resource type="PackedScene" uid="uid://cqxjskl0uvtha" path="res://spawners/health_spawn.tscn" id="9_qppl8"]
-[ext_resource type="AudioStream" uid="uid://cfr174oaswen6" path="res://SoundAffects/green-sky-125179.mp3" id="10_qoby8"]
-[ext_resource type="PackedScene" uid="uid://nvqlswmfqw1o" path="res://shotgun_ammo_pickup.tscn" id="10_vnc52"]
+[sub_resource type="Environment" id="Environment_wkn8e"]
+background_mode = 2
+sky = SubResource("Sky_7r5ns")
+ambient_light_source = 3
 
-[ext_resource type="PackedScene" uid="uid://bnjdafdqgcqrr" path="res://spawners/rifle_spawn.tscn" id="10_ykfm8"]
-[ext_resource type="PackedScene" uid="uid://vuuxeah860w0" path="res://spawners/shotgun_spawn.tscn" id="11_7sdw2"]
-[ext_resource type="Script" path="res://DungeonGenerator.gd" id="12_r5ar0"]
-[ext_resource type="PackedScene" uid="uid://dnpyym87t3qd1" path="res://tiles/floor.tscn" id="13_8lx0m"]
-[ext_resource type="PackedScene" uid="uid://c43m6g3mes7ud" path="res://tiles/simplewall.tscn" id="14_r1a2v"]
-[ext_resource type="PackedScene" uid="uid://cgv6dpff6w01m" path="res://tiles/cornerwall.tscn" id="15_tlvrx"]
-[ext_resource type="PackedScene" uid="uid://bn7d1tkiehxab" path="res://tiles/inversewall.tscn" id="16_vossf"]
-
-[sub_resource type="Environment" id="Environment_3hy4n"]
-background_mode = 1
-ambient_light_source = 2
-ambient_light_color = Color(0, 0.0862745, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi5ed"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gts7"]
 bg_color = Color(0.545098, 0.156863, 0.156863, 0.87451)
 
-[sub_resource type="Theme" id="Theme_quh8o"]
+[sub_resource type="Theme" id="Theme_81bwi"]
 default_font_size = 100
 
-[sub_resource type="Theme" id="Theme_ywmcm"]
+[sub_resource type="Theme" id="Theme_hqw3u"]
 default_font_size = 30
 
-[sub_resource type="Theme" id="Theme_q1civ"]
+[sub_resource type="Theme" id="Theme_cloip"]
 default_font_size = 60
 
-[sub_resource type="Theme" id="Theme_ubx2g"]
+[sub_resource type="Theme" id="Theme_dwuhh"]
 default_font_size = 30
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_vyvbx")
-turret_scene = ExtResource("4_30cvs")
-melee_scene = ExtResource("7_k4qu7")
-health_scene = ExtResource("6_rvstv")
-rifle_scene = ExtResource("9_hehu8")
-shotgun_scene = ExtResource("10_vnc52")
-goal_scene = ExtResource("13_ssnc4")
+script = ExtResource("1_c5gjd")
+turret_scene = ExtResource("2_l3o67")
+melee_scene = ExtResource("3_pw0um")
+health_scene = ExtResource("4_56s3n")
+rifle_scene = ExtResource("5_rc3od")
+shotgun_scene = ExtResource("6_dplge")
 
-[node name="Spawns" type="Node3D" parent="."]
-
-[node name="PlayerSpawn" type="Marker3D" parent="Spawns" groups=["PlayerSpawn"]]
-
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 1, 22)
-
-[node name="HealthSpawn" type="Marker3D" parent="Spawns" groups=["HealthSpawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -3)
-
-[node name="RifleSpawn" type="Marker3D" parent="Spawns" groups=["RifleSpawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 2)
-
-[node name="ShotgunSpawn" type="Marker3D" parent="Spawns" groups=["ShotgunSpawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 5)
-
-[node name="VictorySpawn" type="Marker3D" parent="Spawns" groups=["VictorySpawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 5)
-
-[node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.512921, 0)
-collision_layer = 4
-collision_mask = 0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-mesh = SubResource("BoxMesh_xqenq")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_wpool")
-
-[node name="Wall" type="StaticBody3D" parent="."]
-transform = Transform3D(-0.3168, 0, 0, 0, 9.936, 0, 0, 0, -0.03, -2, 4.48708, -8)
-collision_layer = 4
-collision_mask = 0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
-mesh = SubResource("BoxMesh_xqenq")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
-shape = SubResource("BoxShape3D_wpool")
-
-
-[node name="Character" parent="." instance=ExtResource("1_4ifcc")]
-SPEED = 10.0
+[node name="Character" parent="." instance=ExtResource("6_k11mq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.04831, 0)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Character"]
 transform = Transform3D(-1, -5.63076e-08, -6.68745e-08, 0, 0.764955, -0.644084, 8.74228e-08, -0.644084, -0.764955, 0, 0, 0)
@@ -104,20 +56,21 @@ remote_path = NodePath("../../CameraPivot")
 update_rotation = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.965926, -2.53872e-10, 0.258819, -0.25, 0.258819, 0.933013, -0.0669873, -0.965926, 0.25, 0.931845, 10.4871, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0681549, 10.4871, 0)
 shadow_enabled = true
 
 [node name="CameraPivot" type="Node3D" parent="."]
-transform = Transform3D(-1, -1.079e-07, -7.69584e-08, 1.1219e-08, 0.509672, -0.860369, 1.32057e-07, -0.860369, -0.509672, 0, 1.04831, 0)
+transform = Transform3D(-1, -8.98759e-08, -1.0796e-07, 1.1219e-08, 0.714985, -0.699139, 1.40025e-07, -0.699139, -0.714985, 0, 4.04831, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(-1, 1.42109e-14, -8.74228e-08, 1.42109e-14, 1, 0, 8.74228e-08, 0, -1, -1.41924e-07, 3.09944e-06, -9.52669)
-environment = SubResource("Environment_3hy4n")
+transform = Transform3D(-1, 1.42109e-14, -8.74228e-08, 1.42109e-14, 1, 0, 8.74228e-08, 0, -1, -2.85203e-06, 1.49012e-06, -40.5267)
+environment = SubResource("Environment_wkn8e")
+projection = 1
 current = true
 size = 15.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_qoby8")
+stream = ExtResource("7_5xnwn")
 autoplay = true
 
 [node name="UI" type="Control" parent="."]
@@ -136,9 +89,9 @@ offset_left = 16.0
 offset_top = 10.0
 offset_right = 262.0
 offset_bottom = 37.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_fi5ed")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0gts7")
 fill_mode = 1
-script = ExtResource("1_d7am8")
+script = ExtResource("8_3idmw")
 
 [node name="GunPanel" type="Panel" parent="UI"]
 layout_mode = 0
@@ -146,7 +99,7 @@ offset_left = 13.0
 offset_top = 48.0
 offset_right = 261.0
 offset_bottom = 139.0
-script = ExtResource("2_ooi7e")
+script = ExtResource("9_b8r48")
 
 [node name="Selections" type="HBoxContainer" parent="UI/GunPanel"]
 custom_minimum_size = Vector2(20, 0)
@@ -237,7 +190,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hj8el")
+script = ExtResource("10_fm1qd")
 
 [node name="Label" type="Label" parent="Main Menu"]
 layout_mode = 1
@@ -249,7 +202,7 @@ offset_top = 168.0
 offset_right = 136.0
 offset_bottom = 240.0
 grow_horizontal = 2
-theme = SubResource("Theme_quh8o")
+theme = SubResource("Theme_81bwi")
 text = "Robo Game"
 horizontal_alignment = 1
 
@@ -268,7 +221,7 @@ offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-theme = SubResource("Theme_ywmcm")
+theme = SubResource("Theme_hqw3u")
 text = "Start Game"
 icon_alignment = 1
 
@@ -287,7 +240,7 @@ offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-theme = SubResource("Theme_ywmcm")
+theme = SubResource("Theme_hqw3u")
 text = "Instructions"
 icon_alignment = 1
 
@@ -306,7 +259,7 @@ offset_bottom = 192.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-theme = SubResource("Theme_ywmcm")
+theme = SubResource("Theme_hqw3u")
 text = "Quit
 "
 icon_alignment = 1
@@ -333,33 +286,8 @@ offset_right = 307.0
 offset_bottom = 66.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_q1civ")
+theme = SubResource("Theme_cloip")
 text = "Game Over"
-
-[node name="Victory" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_left = 412.5
-offset_top = 281.0
-offset_right = 452.5
-offset_bottom = 321.0
-
-[node name="VictoryScreen" type="Label" parent="Victory"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 307.0
-offset_bottom = 66.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_q1civ")
-text = "You Won!"
 
 [node name="Instructions" type="Control" parent="."]
 visible = false
@@ -384,7 +312,7 @@ offset_right = 375.0
 offset_bottom = 95.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_ubx2g")
+theme = SubResource("Theme_dwuhh")
 text = "Get to the end of the level
 Shoot enemies with Mouse Click before they kill you
 
@@ -409,30 +337,17 @@ offset_bottom = -140.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_default_cursor_shape = 2
-theme = SubResource("Theme_ywmcm")
+theme = SubResource("Theme_hqw3u")
 text = "Back"
 
 [node name="Level" type="Node3D" parent="."]
-script = ExtResource("12_r5ar0")
-floor = ExtResource("13_8lx0m")
-s_wall = ExtResource("14_r1a2v")
-i_wall = ExtResource("15_tlvrx")
-o_wall = ExtResource("16_vossf")
+script = ExtResource("1_rx7gu")
+floor = ExtResource("2_dx5tl")
+s_wall = ExtResource("3_brobe")
+i_wall = ExtResource("4_7uvtb")
+o_wall = ExtResource("5_16ml7")
 tileSize = 4
-meleeSpawn = ExtResource("7_ym552")
-turretSpawn = ExtResource("8_560xd")
-healthSpawn = ExtResource("9_qppl8")
-rifleSpawn = ExtResource("10_ykfm8")
-shotgunSpawn = ExtResource("11_7sdw2")
-goalSpawn = ExtResource("8_560xd")
 
-[connection signal="changeAmmo" from="Character" to="UI/GunPanel" method="_on_character_change_ammo"]
-[connection signal="changeWeapon" from="Character" to="UI/GunPanel" method="_on_character_change_weapon"]
-[connection signal="damaged" from="Character" to="UI/HealthBar" method="_on_character_damaged"]
-[connection signal="died" from="Character" to="." method="_on_character_died"]
-[connection signal="healed" from="Character" to="UI/HealthBar" method="_on_character_healed"]
-[connection signal="start_game" from="Main Menu" to="." method="_on_main_menu_start_game"]
 [connection signal="pressed" from="Main Menu/StartButton" to="Main Menu" method="_on_start_button_pressed"]
 [connection signal="pressed" from="Main Menu/InstructionsButton" to="Main Menu" method="_on_instructions_button_pressed"]
 [connection signal="pressed" from="Main Menu/QuitButton" to="Main Menu" method="_on_quit_button_pressed"]
-[connection signal="pressed" from="Instructions/Button" to="Main Menu" method="_on_button_pressed"]

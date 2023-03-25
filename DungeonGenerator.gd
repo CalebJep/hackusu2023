@@ -8,6 +8,14 @@ extends Node3D
 
 @export var tileSize: int
 
+@export var meleeSpawn : PackedScene
+@export var turretSpawn : PackedScene
+@export var healthSpawn : PackedScene
+@export var rifleSpawn : PackedScene
+@export var shotgunSpawn : PackedScene
+
+@export var goalSpawn : PackedScene
+
 var rooms = []
 var doors = []
 var matrix = {
@@ -36,7 +44,7 @@ func _ready():
 				var newTile = floor.instantiate() as Node3D
 				newTile.position.x = x * tileSize
 				newTile.position.z = y * tileSize
-				get_node("/root/Node3D").add_child(newTile)
+				add_child.call_deferred(newTile)
 				
 
 	doors = remove_duplicate_doors(doors)
@@ -53,7 +61,9 @@ func _ready():
 		doortile.position.x = door.x * tileSize
 		doortile.position.z = door.y * tileSize
 		make_walls(door.x, door.y)
-		get_node("/root/Node3D").add_child(doortile)
+		add_child.call_deferred(doortile)
+	
+	populate_level.call_deferred(50)
 
 func make_walls(x, y):
 	var first_wall
@@ -69,7 +79,7 @@ func make_walls(x, y):
 				var i_wall_new = i_wall.instantiate() as Node3D
 				i_wall_new.position = Vector3(x * tileSize, 0, y * tileSize)
 				i_wall_new.rotate_y(PI * -i / 2 + PI)
-				get_node("/root/Node3D").add_child(i_wall_new)
+				add_child.call_deferred(i_wall_new)
 				i += 2
 				if i >= 4 and first_wall != null:
 					first_wall.queue_free()
@@ -79,12 +89,12 @@ func make_walls(x, y):
 					var wallpatch = o_wall.instantiate() as Node3D
 					wallpatch.position = Vector3((x + x_offset) * tileSize, 0, (y + y_offset) * tileSize)
 					wallpatch.rotate_y(PI * -i / 2 - PI / 2)
-					get_node("/root/Node3D").add_child(wallpatch)
+					add_child.call_deferred(wallpatch)
 				#instantiate a wall
 				var walltile = s_wall.instantiate() as Node3D
 				walltile.position = Vector3(x * tileSize, 0, y * tileSize)
 				walltile.rotate_y(PI * -i / 2+ PI)
-				get_node("/root/Node3D").add_child(walltile)
+				add_child.call_deferred(walltile)
 				if i == 0:
 					first_wall = walltile
 		i += 1
@@ -111,22 +121,10 @@ func mark_available_doors():
 			if matrix['values'][i][j] == 0:
 				if matrix['values'][i - 1][j] == 0 and matrix['values'][i + 1][j] == 0:
 					if matrix['values'][i][j - 1] != 0 and matrix['values'][i][j + 1] != 0 and matrix['values'][i][j - 1] != matrix['values'][i][j + 1]:
-#						matrix['values'][i][j] = -1
-
-#						var id_val = matrix['values'][i][j + 1]
-#						for room in get_rooms_by_id(matrix['values'][i][j - 1]):
-#							room.id = id_val
-#							room.populate_matrix(matrix)
 						doors.append(Door.new(j + matrix['startx'], i + matrix['starty'], [matrix['values'][i][j + 1], matrix['values'][i][j - 1]]))
 						
 				elif matrix['values'][i][j - 1] == 0 and matrix['values'][i][j + 1] == 0:
 					if matrix['values'][i - 1][j] != 0 and matrix['values'][i + 1][j] != 0 and matrix['values'][i - 1][j] != matrix['values'][i + 1][j]:
-#						matrix['values'][i][j] = -2
-
-#						var id_val = matrix['values'][i + 1][j]
-#						for room in get_rooms_by_id(matrix['values'][i - 1][j]):
-#							room.id = id_val
-#							room.populate_matrix(matrix, matrix['values'][i + 1][j])
 						doors.append(Door.new(j + matrix['startx'], i + matrix['starty'], [matrix['values'][i + 1][j], matrix['values'][i - 1][j]] ))
 func get_rooms_by_id(id : int):
 	var ret = []
@@ -134,7 +132,20 @@ func get_rooms_by_id(id : int):
 		if room.id == id:
 			ret.append(room)
 	return ret
-	
+
+func populate_level(amount : int):
+	var i = 0
+	while i < amount:
+		var x = randi_range(0, matrix['endx'] - matrix['startx'])
+		var y = randi_range(0, matrix['endy'] - matrix['starty'])
+		if matrix['values'][y][x] != 0:
+			for option in [meleeSpawn, turretSpawn, healthSpawn, rifleSpawn, shotgunSpawn]:
+				var spawn = (option as PackedScene).instantiate() as Node3D
+				spawn.position.x = (x + matrix['startx']) * tileSize
+				spawn.position.z = (y + matrix['starty']) * tileSize
+				get_node("/root/Main/Spawns").add_child.call_deferred(spawn)
+				i += 1
+
 func generate_matrix():
 	var row = []
 	row.resize(matrix['endx'] - matrix['startx'] + 1)
@@ -196,7 +207,6 @@ func generate(roomCount, maxDim, minDim):
 		if can_place:
 			parentRoom = newRoom
 			rooms.append(newRoom)
-#			doors.append(Vector2i(x_start, y_start))
 			i += 1
 
 class Room:

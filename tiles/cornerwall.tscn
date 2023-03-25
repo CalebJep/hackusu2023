@@ -6,6 +6,7 @@
 size = Vector3(1, 4, 4)
 
 [node name="cornerwall" type="StaticBody3D"]
+collision_layer = 4
 
 [node name="Cornerwallfinal" parent="." instance=ExtResource("1_fl24l")]
 

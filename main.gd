@@ -37,6 +37,7 @@ func _on_main_menu_start_game():
 		var shotgun = shotgun_scene.instantiate()
 		shotgun.position = spawn.position
 		add_child(shotgun)
+
 		
 		
 	var goals = get_tree().get_nodes_in_group("VictorySpawn")
