@@ -7,7 +7,7 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_cwh3n"]
 
-[node name="RifleAmmoPickup" type="Area3D"]
+[node name="RifleAmmoPickup" type="Area3D" groups=["pickup"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_fqu2m")
 

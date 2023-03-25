@@ -1,15 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://rbxbstf2x601"]
+[gd_scene load_steps=5 format=3 uid="uid://b4w8517qpjd5q"]
 
-[ext_resource type="Script" path="res://Area3D.gd" id="1_41hgt"]
+[ext_resource type="Script" path="res://health_pickup.gd" id="1_ckgny"]
 [ext_resource type="AudioStream" uid="uid://bxeyp564buejq" path="res://SoundAffects/HealthPickup.mp3" id="2_bx5wh"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mny5l"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_cwh3n"]
 
-[node name="HealthPickup" type="Area3D"]
+[node name="HealthPickup" type="Area3D" groups=["pickup"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("1_41hgt")
+script = ExtResource("1_ckgny")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_mny5l")
