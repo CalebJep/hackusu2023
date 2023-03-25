@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://jy42jcydgc4a"]
+
+[ext_resource type="PackedScene" uid="uid://damodg7vlykkg" path="res://character.tscn" id="1_4ifcc"]
+[ext_resource type="Texture2D" uid="uid://bawnnb1rhguwv" path="res://icon.png" id="1_v4bxo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkiib"]
+albedo_texture = ExtResource("1_v4bxo")
+
+[sub_resource type="BoxMesh" id="BoxMesh_xqenq"]
+material = SubResource("StandardMaterial3D_pkiib")
+size = Vector3(50, 1, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wpool"]
+size = Vector3(50, 1, 50)
+
+[node name="Main" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.512921, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_xqenq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_wpool")
+
+[node name="Character" parent="." instance=ExtResource("1_4ifcc")]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Character"]
+transform = Transform3D(-1, -5.63076e-08, -6.68745e-08, 0, 0.764955, -0.644084, 8.74228e-08, -0.644084, -0.764955, 0, 0, 0)
+remote_path = NodePath("../../CameraPivot")
+update_rotation = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0681549, 10.4871, 0)
+shadow_enabled = true
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(-1, -9.72539e-08, -1.15505e-07, 1.1219e-08, 0.714985, -0.699139, 1.50578e-07, -0.699139, -0.714985, 0, 1.04831, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.98023e-07, -7.90326)
+projection = 1
+current = true
+size = 15.0
