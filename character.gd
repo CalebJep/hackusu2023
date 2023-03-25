@@ -4,6 +4,7 @@ signal damaged(damage)
 signal healed(healing)
 signal changeWeapon()
 signal changeAmmo()
+signal died()
 
 # Stores bullets
 @export var bullet_scene: PackedScene
@@ -16,8 +17,8 @@ var weapons = ["pistol", "rifle", "shotgun"]
 var equiped_weapon = 0
 
 # Track ammo
-@export var shotgun_ammo = 10
-@export var rifle_ammo = 20
+@export var shotgun_ammo = 5
+@export var rifle_ammo = 25
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -25,6 +26,22 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func initialize(start_position):
+	position = start_position
+	health = 10
+	shotgun_ammo = 5
+	rifle_ammo = 25
+	var equiped_weapon = 0
+	emit_signal("healed", health)
+	emit_signal("changeAmmo")
+	emit_signal("changeWeapon")
+	set_physics_process(true)
+	$CollisionShape3D.disabled = false
+	show()
+
+func _ready():
+	set_physics_process(false)
+	
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -76,35 +93,43 @@ func shoot(gun):
 	# Get the location and angle of the bullet
 	var bullet_spawn_location = $GunModel/BulletSpawner.global_position
 	var angle = rotation
+	var root = get_node("/root/Main")
 
 	if gun == "pistol":
 		var bullet = bullet_scene.instantiate()
 		bullet.initialize("player", bullet_spawn_location, angle)
-		get_node("/root/Main").add_child(bullet)
+		root.add_child(bullet)
+		$PistolShot.play()
 	elif gun == "rifle":
 		if rifle_ammo > 0:
 			var bullet = bullet_scene.instantiate()
 			bullet.initialize("player", bullet_spawn_location, angle)
-			get_node("/root/Main").add_child(bullet)
+			root.add_child(bullet)
 			rifle_ammo -= 1
+			$RifleShot.play()
+		else:
+			$EmptyGun.play()
 	elif gun == "shotgun":
 		if shotgun_ammo > 0:
 			var bullet = bullet_scene.instantiate()
 			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y-0.25, angle.z))
-			get_node("/root/Main").add_child(bullet)
+			root.add_child(bullet)
 			bullet = bullet_scene.instantiate()
 			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y-0.125, angle.z))
-			get_node("/root/Main").add_child(bullet)
+			root.add_child(bullet)
 			bullet = bullet_scene.instantiate()
 			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y, angle.z))
-			get_node("/root/Main").add_child(bullet)
+			root.add_child(bullet)
 			bullet = bullet_scene.instantiate()
 			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y+0.125, angle.z))
-			get_node("/root/Main").add_child(bullet)
+			root.add_child(bullet)
 			bullet = bullet_scene.instantiate()
 			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y+0.25, angle.z))
-			get_node("/root/Main").add_child(bullet)
+			root.add_child(bullet)
 			shotgun_ammo -= 1
+			$ShotgunShot.play()
+		else:
+			$EmptyGun.play()
 			
 	emit_signal("changeAmmo")
 
@@ -113,7 +138,11 @@ func hit(damage):
 	health -= damage
 	emit_signal("damaged", damage)
 	if health <= 0:
-		queue_free()
+		emit_signal("died")
+		hide()
+		set_physics_process(false)
+		$CollisionShape3D.disabled = true
+		
 		
 func heal(healing):
 	health += healing
@@ -132,3 +161,4 @@ func swap_weapon():
 	if equiped_weapon > 2:
 		equiped_weapon = 0
 	emit_signal("changeWeapon")
+	$SwapWeapon.play()

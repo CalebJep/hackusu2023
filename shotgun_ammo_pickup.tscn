@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://nvqlswmfqw1o"]
+[gd_scene load_steps=5 format=3 uid="uid://nvqlswmfqw1o"]
 
 [ext_resource type="Script" path="res://shotgun_ammo_pickup.gd" id="1_xo8tq"]
+[ext_resource type="AudioStream" uid="uid://ddpv7eh2ede10" path="res://SoundAffects/ShotgunPickup.mp3" id="2_765tr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mny5l"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_cwh3n"]
 
-[node name="ShotgunAmmoPickup" type="Area3D"]
+[node name="ShotgunAmmoPickup" type="Area3D" groups=["pickup"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_xo8tq")
 
@@ -16,5 +17,8 @@ shape = SubResource("SphereShape3D_mny5l")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_cwh3n")
 skeleton = NodePath("../CollisionShape3D")
+
+[node name="Pickup" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_765tr")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

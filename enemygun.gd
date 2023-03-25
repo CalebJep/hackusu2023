@@ -14,6 +14,9 @@ var player
 
 func _ready():
 	player = get_node("/root/Main/Character")
+	$CollisionShape3D.disabled = true
+	set_physics_process(false)
+
 
 func _physics_process(delta):
 	if player:
@@ -43,7 +46,8 @@ func hit(damage):
 		queue_free()
 
 func _on_shoot_timer_timeout():
-	shoot()
+	if is_physics_processing():
+		shoot()
 
 func shoot():
 	# Create a bullet instance and add it to the scene.
@@ -55,6 +59,7 @@ func shoot():
 	
 	bullet.initialize("enemy", bullet_spawn_location, angle)
 	get_node("/root/Main").add_child(bullet)
+	$FireShot.play()
 	
 func _on_visible_on_screen_notifier_3d_screen_entered():
 	$CollisionShape3D.disabled = false

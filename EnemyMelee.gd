@@ -10,6 +10,8 @@ var player
 
 func _ready():
 	player = get_node("/root/Main/Character")
+	$CollisionShape3D.disabled = true
+	set_physics_process(false)
 
 func _physics_process(delta):
 	# Go to player

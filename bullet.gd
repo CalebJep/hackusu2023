@@ -9,8 +9,16 @@ func _physics_process(delta):
 	
 	# When hitting a target
 	if target:
+		$CollisionShape3D.disabled = true
+		set_physics_process(false)
+		hide()
 		if target.get_collider().has_method("hit"):
 			target.get_collider().hit(damage)
+			$HitBody.play() 
+			await $HitBody.finished
+		else:
+			$HitWall.play() 
+			await $HitWall.finished
 		queue_free()
 
 func initialize(source, start_position, angle):
