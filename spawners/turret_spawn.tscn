@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://3klv4vsy1ers"]
-
-[node name="TurretSpawn" type="Marker3D" groups=["TurretSpawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.588, 1, -1.398)

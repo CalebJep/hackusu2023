@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://cqxjskl0uvtha"]
-
-[node name="HealthSpawn" type="Marker3D" groups=["HealthSpawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -3)
