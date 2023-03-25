@@ -6,6 +6,7 @@ extends CharacterBody3D
 # Track Health
 @export var health = 1
 
+# Make the ai not aimbots
 @export var inaccuracy = 1.0
 var current_inaccuracy = randf_range(-0.08, 0.08)
 
@@ -18,8 +19,6 @@ func _physics_process(delta):
 		var target = player.transform.origin
 		look_at(target, Vector3.UP)
 		rotate_y(current_inaccuracy)
-
-		
 
 func hit(damage):
 	health -= damage
@@ -37,5 +36,6 @@ func shoot():
 	var bullet_spawn_location = $GunModel/BulletSpawner.global_position
 	var angle = rotation
 	
-	get_node("/root/Main").add_child(bullet)
 	bullet.initialize("enemy", bullet_spawn_location, angle)
+	get_node("/root/Main").add_child(bullet)
+	

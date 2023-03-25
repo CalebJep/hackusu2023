@@ -1,9 +1,11 @@
+res://HealthBar.gd
 res://default_env.tres
-res://character.tscn
 res://main.tscn
 res://character.gd
+res://character.tscn
 res://bullet.tscn
-res://bullet.gd
-res://MeshInstance3D.gd
 res://enemy.tscn
+res://bullet.gd
 res://enemy.gd
+res://Area3D.gd
+res://health_pickup.tscn

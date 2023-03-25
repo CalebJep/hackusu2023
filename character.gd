@@ -1,10 +1,13 @@
 extends CharacterBody3D
 
+signal damaged(damage)
+signal healed(healing)
+
 # Stores bullets
 @export var bullet_scene: PackedScene
 
-# Track Health
-@export var health = 100
+# Track Healtha
+@export var health = 10
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -22,9 +25,12 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		
-		# Handle Shoot.
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
+	# Handle Shoot.
+	if Input.is_action_pressed("shoot"):
+		if $GunCooldown.is_stopped():
+			shoot()
+			$GunCooldown.start(0.25)
+		
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -39,6 +45,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
+	# Rotate to face mouse
 	var offset = -PI * 0.5
 	var screen_pos = get_node("/root/Main/CameraPivot/Camera3D").unproject_position(global_transform.origin)
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -58,5 +65,10 @@ func shoot():
 	
 func hit(damage):
 	health -= damage
+	emit_signal("damaged", damage)
 	if health <= 0:
 		queue_free()
+		
+func heal(healing):
+	health += healing
+	emit_signal("healed", healing)

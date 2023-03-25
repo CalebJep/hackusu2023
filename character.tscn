@@ -29,3 +29,7 @@ mesh = SubResource("CylinderMesh_aecoe")
 
 [node name="BulletSpawner" type="Marker3D" parent="GunModel"]
 transform = Transform3D(2.58934, 0, 0, 0, -1.56908e-07, 3.58964, 0, -3.7139, -1.6234e-07, 0.0330562, -0.879408, 0.00162888)
+
+[node name="GunCooldown" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true

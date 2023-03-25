@@ -1,7 +1,12 @@
 2a60927148abd1d33b818b535e306557
-::res://::1679707859
-default_env.tres::Environment::3592986065665959973::1679707859::0::1::::<><>::
+::res://::1679715348
+bullet.gd::GDScript::-1::1679712462::0::1::::<>CharacterBody3D<>::
+bullet.tscn::PackedScene::1707306478103824241::1679715168::0::1::::<><>::res://bullet.gd
+character.gd::GDScript::-1::1679714118::0::1::::<>CharacterBody3D<>::
+character.tscn::PackedScene::7184890344952106642::1679715168::0::1::::<><>::res://character.gd<>uid://ylbdaayxsm7b
+default_env.tres::Environment::3592986065665959973::1679715283::0::1::::<><>::
+enemy.gd::GDScript::-1::1679715054::0::1::::<>CharacterBody3D<>::
+enemy.tscn::PackedScene::5094770793819112801::1679715168::0::1::::<><>::res://enemy.gd<>uid://ylbdaayxsm7b
 icon.png::CompressedTexture2D::2432649623979425041::1679702431::1679707905::1::::<><>::
-character.tscn::PackedScene::7184890344952106642::1679707859::0::1::::<><>::res://character.gd
-character.gd::GDScript::-1::1679707725::0::1::::<>CharacterBody3D<>::
-main.tscn::PackedScene::683054144959844162::1679707859::0::1::::<><>::uid://damodg7vlykkg
+main.tscn::PackedScene::683054144959844162::1679715283::0::1::::<><>::uid://damodg7vlykkg<>uid://bawnnb1rhguwv<>res://MeshInstance3D.gd<>uid://cet7eo83x3uab
+MeshInstance3D.gd::GDScript::-1::1679708874::0::1::::<>MeshInstance3D<>::

@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 # speed of bullets
 @export var speed = 40
-
+@export var damage = 1
 
 func _physics_process(delta):
 	var target = move_and_collide(velocity * delta)
@@ -10,7 +10,7 @@ func _physics_process(delta):
 	# When hitting a target
 	if target:
 		if target.get_collider().has_method("hit"):
-			target.get_collider().hit(1)
+			target.get_collider().hit(damage)
 			queue_free()
 
 func initialize(source, start_position, angle):
