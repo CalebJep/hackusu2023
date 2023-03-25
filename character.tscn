@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://damodg7vlykkg"]
+[gd_scene load_steps=6 format=3 uid="uid://damodg7vlykkg"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_3pxy7"]
+[ext_resource type="PackedScene" uid="uid://ylbdaayxsm7b" path="res://bullet.tscn" id="2_c5vfo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bjs30"]
 
@@ -11,15 +12,19 @@
 [node name="Character" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04831, 0)
 script = ExtResource("1_3pxy7")
+bullet_scene = ExtResource("2_c5vfo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00579953, 0, -1.4782e-05)
 shape = SubResource("CapsuleShape3D_bjs30")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="PlayerModel" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_7sqqc")
 skeleton = NodePath("../CollisionShape3D")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="GunModel" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.386199, 0, 0, 0, -1.21771e-08, -0.269259, 0, 0.278579, -1.17697e-08, 0.194625, 0.204036, -0.545231)
 mesh = SubResource("CylinderMesh_aecoe")
+
+[node name="BulletSpawner" type="Marker3D" parent="GunModel"]
+transform = Transform3D(2.58934, 0, 0, 0, -1.56908e-07, 3.58964, 0, -3.7139, -1.6234e-07, 0.0330562, -0.879408, 0.00162888)

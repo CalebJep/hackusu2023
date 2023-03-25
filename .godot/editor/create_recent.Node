@@ -1,9 +1,11 @@
+VisibleOnScreenNotifier3D
+Marker3D
+Node3D
+CollisionShape3D
+MeshInstance3D
+CharacterBody3D
 RemoteTransform3D
 Camera3D
 OmniLight3D
 DirectionalLight3D
-Node3D
-CollisionShape3D
-MeshInstance3D
 StaticBody3D
-CharacterBody3D

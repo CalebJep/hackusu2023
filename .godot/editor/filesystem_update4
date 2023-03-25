@@ -2,3 +2,6 @@ res://default_env.tres
 res://character.tscn
 res://main.tscn
 res://character.gd
+res://bullet.tscn
+res://bullet.gd
+res://MeshInstance3D.gd
