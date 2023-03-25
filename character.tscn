@@ -11,6 +11,7 @@
 
 [node name="Character" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04831, 0)
+collision_mask = 22
 script = ExtResource("1_3pxy7")
 bullet_scene = ExtResource("2_c5vfo")
 

@@ -1,9 +1,11 @@
+Timer
+Area3D
+CharacterBody3D
 VisibleOnScreenNotifier3D
 Marker3D
 Node3D
 CollisionShape3D
 MeshInstance3D
-CharacterBody3D
 RemoteTransform3D
 Camera3D
 OmniLight3D

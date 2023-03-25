@@ -4,10 +4,25 @@ extends CharacterBody3D
 @export var speed = 40
 
 
-func _physics_process(_delta):
-	move_and_slide()
+func _physics_process(delta):
+	var target = move_and_collide(velocity * delta)
+	
+	# When hitting a target
+	if target:
+		if target.get_collider().has_method("hit"):
+			target.get_collider().hit(1)
+			queue_free()
 
-func initialize(start_position, angle):
+func initialize(source, start_position, angle):
+	# Set as player or enemy bullet
+	if source == "player":
+		set_collision_layer_value(4, true)
+		set_collision_mask_value(2, true)
+	elif source == "enemy":
+		set_collision_layer_value(5, true)
+		set_collision_mask_value(1, true)
+		
+	# set location and move data
 	position = start_position
 	rotation = angle
 	
@@ -15,5 +30,5 @@ func initialize(start_position, angle):
 	velocity = velocity.rotated(Vector3.UP, rotation.y)
 
 # Despawn when leaves viewable area
-#func _on_visible_on_screen_notifier_3d_screen_exited():
-#	queue_free()
+func _on_visible_on_screen_notifier_3d_screen_exited():
+	queue_free()

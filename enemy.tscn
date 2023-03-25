@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cet7eo83x3uab"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_sefpf"]
+[ext_resource type="PackedScene" uid="uid://ylbdaayxsm7b" path="res://bullet.tscn" id="2_ixqcq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_owang"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1ageq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_go50o"]
+
+[node name="Enemy" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03362, 0)
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_sefpf")
+bullet_scene = ExtResource("2_ixqcq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00579953, 0, -1.4782e-05)
+shape = SubResource("CapsuleShape3D_owang")
+
+[node name="PlayerModel" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_1ageq")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="GunModel" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.386199, 0, 0, 0, -1.21771e-08, -0.269259, 0, 0.278579, -1.17697e-08, 0.194625, 0.204036, -0.545231)
+mesh = SubResource("CylinderMesh_go50o")
+
+[node name="BulletSpawner" type="Marker3D" parent="GunModel"]
+transform = Transform3D(2.58934, 0, 0, 0, -1.56908e-07, 3.58964, 0, -3.7139, -1.6234e-07, 0.0330562, -0.879408, 0.00162888)
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

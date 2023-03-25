@@ -1,7 +1,10 @@
 extends CharacterBody3D
 
-# For creating bullets
+# Stores bullets
 @export var bullet_scene: PackedScene
+
+# Track Health
+@export var health = 100
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -51,4 +54,9 @@ func shoot():
 	var angle = rotation
 	
 	get_node("/root/Main").add_child(bullet)
-	bullet.initialize(bullet_spawn_location, angle)
+	bullet.initialize("player", bullet_spawn_location, angle)
+	
+func hit(damage):
+	health -= damage
+	if health <= 0:
+		queue_free()

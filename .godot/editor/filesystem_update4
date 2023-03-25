@@ -5,3 +5,5 @@ res://character.gd
 res://bullet.tscn
 res://bullet.gd
 res://MeshInstance3D.gd
+res://enemy.tscn
+res://enemy.gd
