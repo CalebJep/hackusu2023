@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn7d1tkiehxab"]
+
+[ext_resource type="PackedScene" uid="uid://b8ek5hbramoal" path="res://Models/inversewallfinal.glb" id="1_bdggt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vg02a"]
+size = Vector3(1, 4, 1)
+
+[node name="inversewall" type="StaticBody3D"]
+
+[node name="inversewallfinal" parent="." instance=ExtResource("1_bdggt")]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="inversewallfinal"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 2, 2)
+shape = SubResource("BoxShape3D_vg02a")
