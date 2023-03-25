@@ -19,6 +19,10 @@ config/icon="res://icon.png"
 
 project/assembly_name="HackUSU2023"
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
