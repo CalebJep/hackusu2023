@@ -23,17 +23,19 @@ func _physics_process(delta):
 		# Look at player
 		current_inaccuracy += randf_range(-0.0035, 0.0035) * inaccuracy
 		current_inaccuracy = clamp(current_inaccuracy, -0.08, 0.08)
-		var target = player.transform.origin
+		var target = player.global_position
 		look_at(target, Vector3.UP)
 		rotate_y(current_inaccuracy)
+		$Base.global_rotation = Vector3.ZERO
+		$Base.scale = Vector3(0.49, 0.49, 0.49)
 	
 		# Check if player is visible
 		if player:
 			var EnemyToPlayer = player.global_position - global_position
-			$GunModel/BulletSpawner/RayCast3D.global_rotation = Vector3.ZERO
-			$GunModel/BulletSpawner/RayCast3D.target_position = EnemyToPlayer
+			$Gun/BulletSpawner/RayCast3D.global_rotation = Vector3.ZERO
+			$Gun/BulletSpawner/RayCast3D.target_position = EnemyToPlayer
 			
-		if $GunModel/BulletSpawner/RayCast3D.is_colliding() && $GunModel/BulletSpawner/RayCast3D.get_collider() == player:
+		if $Gun/BulletSpawner/RayCast3D.is_colliding() && $Gun/BulletSpawner/RayCast3D.get_collider() == player:
 			if $ShootTimer.is_stopped():
 				$ShootTimer.start()
 
@@ -54,7 +56,7 @@ func shoot():
 	var bullet = bullet_scene.instantiate()
 	
 	# Get the location and angle of the bullet
-	var bullet_spawn_location = $GunModel/BulletSpawner.global_position
+	var bullet_spawn_location = $Gun/BulletSpawner.global_position
 	var angle = rotation
 	
 	bullet.initialize("enemy", bullet_spawn_location, angle)
