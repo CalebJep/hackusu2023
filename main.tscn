@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://upf1o1mk1k47"]
+[gd_scene load_steps=15 format=3 uid="uid://upf1o1mk1k47"]
 
 [ext_resource type="PackedScene" uid="uid://bjrvbccc13n6i" path="res://character.tscn" id="1_4ifcc"]
 [ext_resource type="Script" path="res://HealthBar.gd" id="1_d7am8"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://ba5nyxhqkyhrg" path="res://rifle_ammo_pickup.tscn" id="9_hehu8"]
 [ext_resource type="AudioStream" uid="uid://cfr174oaswen6" path="res://SoundAffects/green-sky-125179.mp3" id="10_qoby8"]
 [ext_resource type="PackedScene" uid="uid://nvqlswmfqw1o" path="res://shotgun_ammo_pickup.tscn" id="10_vnc52"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fi5ed"]
+bg_color = Color(0.545098, 0.156863, 0.156863, 0.87451)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkiib"]
 albedo_color = Color(1, 0.219608, 0.129412, 1)
@@ -36,6 +39,7 @@ offset_left = 16.0
 offset_top = 10.0
 offset_right = 262.0
 offset_bottom = 37.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_fi5ed")
 fill_mode = 1
 script = ExtResource("1_d7am8")
 
@@ -47,80 +51,81 @@ offset_right = 261.0
 offset_bottom = 139.0
 script = ExtResource("2_ooi7e")
 
-[node name="PistolSelect" type="Label" parent="UI/GunPanel"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 66.0
-offset_right = 54.0
-offset_bottom = 92.0
-text = "/\\"
+[node name="Selections" type="HBoxContainer" parent="UI/GunPanel"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 242.0
+offset_bottom = 85.0
+alignment = 1
 
-[node name="RifleSelect" type="Label" parent="UI/GunPanel"]
-layout_mode = 0
-offset_left = 107.0
-offset_top = 73.0
-offset_right = 129.0
-offset_bottom = 99.0
-text = "/\\"
+[node name="PistolSelect" type="ColorRect" parent="UI/GunPanel/Selections"]
+custom_minimum_size = Vector2(75, 80)
+layout_mode = 2
+color = Color(0.545098, 0.156863, 0.156863, 0)
 
-[node name="ShotgunSelect" type="Label" parent="UI/GunPanel"]
-layout_mode = 0
-offset_left = 195.0
-offset_top = 73.0
-offset_right = 217.0
-offset_bottom = 99.0
-text = "/\\"
+[node name="RifleSelect" type="ColorRect" parent="UI/GunPanel/Selections"]
+custom_minimum_size = Vector2(75, 80)
+layout_mode = 2
+color = Color(0.545098, 0.156863, 0.156863, 1)
 
-[node name="Label" type="Label" parent="UI/GunPanel"]
-layout_mode = 0
-offset_left = 166.0
-offset_top = 3.0
-offset_right = 231.0
-offset_bottom = 29.0
-text = "Shotgun"
+[node name="ShotgunSelect" type="ColorRect" parent="UI/GunPanel/Selections"]
+custom_minimum_size = Vector2(75, 80)
+layout_mode = 2
+color = Color(0.545098, 0.156863, 0.156863, 1)
 
-[node name="Label2" type="Label" parent="UI/GunPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 2.121
-offset_left = 98.0
+[node name="Info" type="HBoxContainer" parent="UI/GunPanel"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+offset_left = 8.0
 offset_top = 4.0
-offset_right = 146.0
-offset_bottom = -157.011
-text = "Rifle"
+offset_right = 241.0
+offset_bottom = 84.0
+alignment = 1
 
-[node name="Label3" type="Label" parent="UI/GunPanel"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 3.0
-offset_right = 63.0
-offset_bottom = 29.0
+[node name="Pistol" type="VBoxContainer" parent="UI/GunPanel/Info"]
+custom_minimum_size = Vector2(75, 80)
+layout_mode = 2
+alignment = 1
+
+[node name="Label3" type="Label" parent="UI/GunPanel/Info/Pistol"]
+layout_mode = 2
 text = "Pistol"
+horizontal_alignment = 1
 
-[node name="RifleAmmo" type="Label" parent="UI/GunPanel"]
-layout_mode = 0
-offset_left = 89.0
-offset_top = 34.0
-offset_right = 145.0
-offset_bottom = 75.0
+[node name="PistolAmmo" type="Label" parent="UI/GunPanel/Info/Pistol"]
+layout_mode = 2
 text = "-"
 horizontal_alignment = 1
 
-[node name="ShotgunAmmo" type="Label" parent="UI/GunPanel"]
-layout_mode = 0
-offset_left = 175.0
-offset_top = 35.0
-offset_right = 231.0
-offset_bottom = 76.0
+[node name="Rifle" type="VBoxContainer" parent="UI/GunPanel/Info"]
+custom_minimum_size = Vector2(75, 80)
+layout_mode = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="UI/GunPanel/Info/Rifle"]
+layout_mode = 2
+text = "Rifle"
+horizontal_alignment = 1
+
+[node name="RifleAmmo" type="Label" parent="UI/GunPanel/Info/Rifle"]
+layout_mode = 2
 text = "-"
 horizontal_alignment = 1
 
-[node name="PistolAmmo" type="Label" parent="UI/GunPanel"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 34.0
-offset_right = 71.0
-offset_bottom = 75.0
+[node name="Shotgun" type="VBoxContainer" parent="UI/GunPanel/Info"]
+custom_minimum_size = Vector2(75, 80)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/GunPanel/Info/Shotgun"]
+layout_mode = 2
+text = "Shotgun"
+horizontal_alignment = 1
+
+[node name="ShotgunAmmo" type="Label" parent="UI/GunPanel/Info/Shotgun"]
+layout_mode = 2
 text = "-"
 horizontal_alignment = 1
 
