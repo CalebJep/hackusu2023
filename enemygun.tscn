@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://d337rcjme8qh3"]
+
+[ext_resource type="Script" path="res://enemygun.gd" id="1_3rkku"]
+[ext_resource type="PackedScene" uid="uid://y1nsska3fyic" path="res://bullet.tscn" id="2_ixqcq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_owang"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1ageq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_go50o"]
+
+[node name="EnemyGun" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03362, 0)
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_3rkku")
+bullet_scene = ExtResource("2_ixqcq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00579953, 0, -1.4782e-05)
+shape = SubResource("CapsuleShape3D_owang")
+
+[node name="PlayerModel" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_1ageq")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="GunModel" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.386199, 0, 0, 0, -1.21771e-08, -0.269259, 0, 0.278579, -1.17697e-08, 0.194625, 0.204036, -0.545231)
+mesh = SubResource("CylinderMesh_go50o")
+
+[node name="BulletSpawner" type="Marker3D" parent="GunModel"]
+transform = Transform3D(2.58934, 0, 0, 0, -1.56908e-07, 3.58964, 0, -3.7139, -1.6234e-07, 0.0330562, -0.879408, 0.00162888)
+
+[node name="RayCast3D" type="RayCast3D" parent="GunModel/BulletSpawner"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, -9.94761e-14, 0, -2.13163e-13, 1, -0.207391, -0.203597, 0.790217)
+collision_mask = 5
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+layers = 5
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
