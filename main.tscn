@@ -1,0 +1,190 @@
+[gd_scene load_steps=13 format=3 uid="uid://upf1o1mk1k47"]
+
+[ext_resource type="PackedScene" uid="uid://d3qfhx3iw68qy" path="res://character.tscn" id="1_4ifcc"]
+[ext_resource type="Script" path="res://HealthBar.gd" id="1_d7am8"]
+[ext_resource type="Texture2D" uid="uid://bawnnb1rhguwv" path="res://icon.png" id="1_v4bxo"]
+[ext_resource type="Script" path="res://GunPanel.gd" id="2_ooi7e"]
+[ext_resource type="PackedScene" uid="uid://d337rcjme8qh3" path="res://enemygun.tscn" id="4_30cvs"]
+[ext_resource type="PackedScene" uid="uid://rbxbstf2x601" path="res://health_pickup.tscn" id="6_rvstv"]
+[ext_resource type="PackedScene" uid="uid://bjxxmlpi65jkc" path="res://enemy_melee.tscn" id="7_k4qu7"]
+[ext_resource type="PackedScene" uid="uid://ba5nyxhqkyhrg" path="res://rifle_ammo_pickup.tscn" id="9_hehu8"]
+[ext_resource type="PackedScene" uid="uid://nvqlswmfqw1o" path="res://shotgun_ammo_pickup.tscn" id="10_vnc52"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkiib"]
+albedo_color = Color(1, 0.219608, 0.129412, 1)
+albedo_texture = ExtResource("1_v4bxo")
+
+[sub_resource type="BoxMesh" id="BoxMesh_xqenq"]
+material = SubResource("StandardMaterial3D_pkiib")
+size = Vector3(50, 1, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wpool"]
+size = Vector3(50, 1, 50)
+
+[node name="Main" type="Node3D"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 262.0
+offset_bottom = 37.0
+fill_mode = 1
+script = ExtResource("1_d7am8")
+
+[node name="GunPanel" type="Panel" parent="UI"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 48.0
+offset_right = 261.0
+offset_bottom = 139.0
+script = ExtResource("2_ooi7e")
+
+[node name="PistolSelect" type="Label" parent="UI/GunPanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 66.0
+offset_right = 54.0
+offset_bottom = 92.0
+text = "/\\"
+
+[node name="RifleSelect" type="Label" parent="UI/GunPanel"]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 73.0
+offset_right = 129.0
+offset_bottom = 99.0
+text = "/\\"
+
+[node name="ShotgunSelect" type="Label" parent="UI/GunPanel"]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 73.0
+offset_right = 217.0
+offset_bottom = 99.0
+text = "/\\"
+
+[node name="Label" type="Label" parent="UI/GunPanel"]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 3.0
+offset_right = 231.0
+offset_bottom = 29.0
+text = "Shotgun"
+
+[node name="Label2" type="Label" parent="UI/GunPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 2.121
+offset_left = 98.0
+offset_top = 4.0
+offset_right = 146.0
+offset_bottom = -157.011
+text = "Rifle"
+
+[node name="Label3" type="Label" parent="UI/GunPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 3.0
+offset_right = 63.0
+offset_bottom = 29.0
+text = "Pistol"
+
+[node name="RifleAmmo" type="Label" parent="UI/GunPanel"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 34.0
+offset_right = 145.0
+offset_bottom = 75.0
+text = "-"
+horizontal_alignment = 1
+
+[node name="ShotgunAmmo" type="Label" parent="UI/GunPanel"]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 35.0
+offset_right = 231.0
+offset_bottom = 76.0
+text = "-"
+horizontal_alignment = 1
+
+[node name="PistolAmmo" type="Label" parent="UI/GunPanel"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 34.0
+offset_right = 71.0
+offset_bottom = 75.0
+text = "-"
+horizontal_alignment = 1
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.512921, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_xqenq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_wpool")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.3168, 0, 0, 0, 9.936, 0, 0, 0, -0.03, -2, 4.48708, -8)
+collision_layer = 4
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+mesh = SubResource("BoxMesh_xqenq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("BoxShape3D_wpool")
+
+[node name="Character" parent="." instance=ExtResource("1_4ifcc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Character"]
+transform = Transform3D(-1, -5.63076e-08, -6.68745e-08, 0, 0.764955, -0.644084, 8.74228e-08, -0.644084, -0.764955, 0, 0, 0)
+remote_path = NodePath("../../CameraPivot")
+update_rotation = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0681549, 10.4871, 0)
+shadow_enabled = true
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(-1, -8.98759e-08, -1.0796e-07, 1.1219e-08, 0.714985, -0.699139, 1.40025e-07, -0.699139, -0.714985, 0, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.98023e-07, -7.90326)
+projection = 1
+current = true
+size = 15.0
+
+[node name="Enemy" parent="." instance=ExtResource("4_30cvs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.588, 1, -1.398)
+
+[node name="Enemy2" parent="." instance=ExtResource("4_30cvs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.494, 1, -5.912)
+
+[node name="HealthPickup" parent="." instance=ExtResource("6_rvstv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -3)
+
+[node name="EnemyMelee" parent="." instance=ExtResource("7_k4qu7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 2)
+
+[node name="RifleAmmoPickup" parent="." instance=ExtResource("9_hehu8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 2)
+
+[node name="RifleAmmoPickup2" parent="." instance=ExtResource("10_vnc52")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 5)
+
+[connection signal="changeAmmo" from="Character" to="UI/GunPanel" method="_on_character_change_ammo"]
+[connection signal="changeWeapon" from="Character" to="UI/GunPanel" method="_on_character_change_weapon"]
+[connection signal="damaged" from="Character" to="UI/HealthBar" method="_on_character_damaged"]
+[connection signal="healed" from="Character" to="UI/HealthBar" method="_on_character_healed"]
