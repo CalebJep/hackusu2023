@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cypfu0gyt8i2a"]
+
+[ext_resource type="Script" path="res://DungeonGenerator.gd" id="1_s6vnp"]
+[ext_resource type="PackedScene" uid="uid://dnb7ef120ydwk" path="res://placeholder_tile.tscn" id="2_vwofi"]
+
+[sub_resource type="Environment" id="Environment_bo8qg"]
+ambient_light_color = Color(0, 0, 0.298039, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_s6vnp")
+tile = ExtResource("2_vwofi")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.394471, 0.918908, 0, -0.918908, 0.394471, 0, 42.7531, 2.22388)
+environment = SubResource("Environment_bo8qg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
+transform = Transform3D(0.586081, 0.796998, 0.145957, -0.732158, 0.59809, -0.325935, -0.347065, 0.0841604, 0.934057, 0, 0, 0)
