@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://2weue2m1fvhh"]
+
+[ext_resource type="Script" path="res://health_pickup.gd" id="1_aptgv"]
+[ext_resource type="AudioStream" uid="uid://e5l1trkipe2" path="res://SoundAffects/victory.mp3" id="2_sxm2n"]
+[ext_resource type="PackedScene" uid="uid://cmm2egh30uaxq" path="res://Models/teleporter.glb" id="3_v6wpi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ath1p"]
+
+[node name="Goal" type="Area3D" groups=["pickup"]]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 1, 0)
+script = ExtResource("1_aptgv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.057, 0, -2.84217e-14, 0, 1, 0, 5.68434e-14, 0, 2.112, 2.62268e-08, -0.5, -0.2)
+shape = SubResource("BoxShape3D_ath1p")
+
+[node name="Pickup" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_sxm2n")
+
+[node name="teleporter" parent="." instance=ExtResource("3_v6wpi")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.0246164, -1, -0.076871)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered" flags=18]
