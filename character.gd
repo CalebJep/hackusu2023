@@ -81,12 +81,16 @@ func shoot(gun):
 		var bullet = bullet_scene.instantiate()
 		bullet.initialize("player", bullet_spawn_location, angle)
 		get_node("/root/Main").add_child(bullet)
+		$PistolShot.play()
 	elif gun == "rifle":
 		if rifle_ammo > 0:
 			var bullet = bullet_scene.instantiate()
 			bullet.initialize("player", bullet_spawn_location, angle)
 			get_node("/root/Main").add_child(bullet)
 			rifle_ammo -= 1
+			$RifleShot.play()
+		else:
+			$EmptyGun.play()
 	elif gun == "shotgun":
 		if shotgun_ammo > 0:
 			var bullet = bullet_scene.instantiate()
@@ -105,6 +109,9 @@ func shoot(gun):
 			bullet.initialize("player", bullet_spawn_location, Vector3(angle.x, angle.y+0.25, angle.z))
 			get_node("/root/Main").add_child(bullet)
 			shotgun_ammo -= 1
+			$ShotgunShot.play()
+		else:
+			$EmptyGun.play()
 			
 	emit_signal("changeAmmo")
 
@@ -132,3 +139,4 @@ func swap_weapon():
 	if equiped_weapon > 2:
 		equiped_weapon = 0
 	emit_signal("changeWeapon")
+	$SwapWeapon.play()

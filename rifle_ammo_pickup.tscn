@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba5nyxhqkyhrg"]
+[gd_scene load_steps=5 format=3 uid="uid://ba5nyxhqkyhrg"]
 
 [ext_resource type="Script" path="res://rifle_ammo_pickup.gd" id="1_fqu2m"]
+[ext_resource type="AudioStream" uid="uid://c0qw55c8vmpcr" path="res://SoundAffects/RiflePickup.mp3" id="2_oikvt"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mny5l"]
 
@@ -16,5 +17,8 @@ shape = SubResource("SphereShape3D_mny5l")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_cwh3n")
 skeleton = NodePath("../CollisionShape3D")
+
+[node name="Pickup" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_oikvt")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

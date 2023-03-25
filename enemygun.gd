@@ -55,6 +55,7 @@ func shoot():
 	
 	bullet.initialize("enemy", bullet_spawn_location, angle)
 	get_node("/root/Main").add_child(bullet)
+	$FireShot.play()
 	
 func _on_visible_on_screen_notifier_3d_screen_entered():
 	$CollisionShape3D.disabled = false

@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://upf1o1mk1k47"]
+[gd_scene load_steps=14 format=3 uid="uid://upf1o1mk1k47"]
 
-[ext_resource type="PackedScene" uid="uid://d3qfhx3iw68qy" path="res://character.tscn" id="1_4ifcc"]
+[ext_resource type="PackedScene" uid="uid://bjrvbccc13n6i" path="res://character.tscn" id="1_4ifcc"]
 [ext_resource type="Script" path="res://HealthBar.gd" id="1_d7am8"]
 [ext_resource type="Texture2D" uid="uid://bawnnb1rhguwv" path="res://icon.png" id="1_v4bxo"]
 [ext_resource type="Script" path="res://GunPanel.gd" id="2_ooi7e"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://rbxbstf2x601" path="res://health_pickup.tscn" id="6_rvstv"]
 [ext_resource type="PackedScene" uid="uid://bjxxmlpi65jkc" path="res://enemy_melee.tscn" id="7_k4qu7"]
 [ext_resource type="PackedScene" uid="uid://ba5nyxhqkyhrg" path="res://rifle_ammo_pickup.tscn" id="9_hehu8"]
+[ext_resource type="AudioStream" uid="uid://cfr174oaswen6" path="res://SoundAffects/green-sky-125179.mp3" id="10_qoby8"]
 [ext_resource type="PackedScene" uid="uid://nvqlswmfqw1o" path="res://shotgun_ammo_pickup.tscn" id="10_vnc52"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkiib"]
@@ -183,6 +184,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 2)
 
 [node name="RifleAmmoPickup2" parent="." instance=ExtResource("10_vnc52")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 5)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_qoby8")
+autoplay = true
 
 [connection signal="changeAmmo" from="Character" to="UI/GunPanel" method="_on_character_change_ammo"]
 [connection signal="changeWeapon" from="Character" to="UI/GunPanel" method="_on_character_change_weapon"]

@@ -1,7 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3qfhx3iw68qy"]
+[gd_scene load_steps=11 format=3 uid="uid://bjrvbccc13n6i"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_3pxy7"]
 [ext_resource type="PackedScene" uid="uid://y1nsska3fyic" path="res://bullet.tscn" id="2_c5vfo"]
+[ext_resource type="AudioStream" uid="uid://c60dsuu7fsd4o" path="res://SoundAffects/PlayerPistol.mp3" id="3_n4ulx"]
+[ext_resource type="AudioStream" uid="uid://c26deeu7g370v" path="res://SoundAffects/PlayerRifle.mp3" id="4_vyivh"]
+[ext_resource type="AudioStream" uid="uid://ckl2tuny42y0a" path="res://SoundAffects/PlayerShotgun.mp3" id="5_g4s4d"]
+[ext_resource type="AudioStream" uid="uid://cfj1ucbhk7ug3" path="res://SoundAffects/PlayerGunSwap.mp3" id="6_i0n1a"]
+[ext_resource type="AudioStream" uid="uid://cudknejvgq50a" path="res://SoundAffects/EmptyGun.mp3" id="7_nuewj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bjs30"]
 
@@ -33,3 +38,23 @@ transform = Transform3D(2.58934, 0, 0, 0, -1.56908e-07, 3.58964, 0, -3.7139, -1.
 [node name="GunCooldown" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="PistolShot" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_n4ulx")
+max_polyphony = 5
+
+[node name="RifleShot" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_vyivh")
+max_polyphony = 5
+
+[node name="ShotgunShot" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_g4s4d")
+max_polyphony = 5
+
+[node name="SwapWeapon" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_i0n1a")
+max_polyphony = 5
+
+[node name="EmptyGun" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_nuewj")
+max_polyphony = 5
