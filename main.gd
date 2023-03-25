@@ -37,17 +37,6 @@ func _on_main_menu_start_game():
 		shotgun.position = spawn.position
 		add_child(shotgun)
 	
-	var health = health_scene.instantiate()
-	health.position = $Spawns/HealthSpawn.position
-	add_child(health)
-	
-	var rifle = rifle_scene.instantiate()
-	rifle.position = $Spawns/RifleSpawn.position
-	add_child(rifle)
-
-	var shotgun = shotgun_scene.instantiate()
-	shotgun.position = $Spawns/ShotgunSpawn.position
-	add_child(shotgun)
 	
 	
 	$UI.show()
